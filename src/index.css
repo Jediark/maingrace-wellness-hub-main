@@ -1,0 +1,279 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Maingrace247 Tradomedical Service Design System
+   Earthy, organic, sophisticated wellness aesthetic */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;1,6..12,400&display=swap');
+
+@layer base {
+  :root {
+    /* Core Brand Colors - HSL Format (Solid) */
+    --background: 45 40% 98%;
+    --foreground: 150 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 15% 15%;
+
+    /* Maingrace Green - Primary (Solid) */
+    --primary: 122 39% 49%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Light Green - Secondary (Solid) */
+    --secondary: 125 35% 59%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Earthy Neutrals (Solid) */
+    --muted: 45 15% 94%;
+    --muted-foreground: 150 10% 40%;
+
+    /* Accent - Forest Green (Solid) */
+    --accent: 122 47% 34%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 122 15% 85%;
+    --input: 122 15% 88%;
+    --ring: 122 39% 49%;
+
+    --radius: 0.5rem;
+
+    /* Extended Palette (Solid) */
+    --cream: 45 50% 96%;
+    --cream-dark: 45 30% 90%;
+    --sage: 120 15% 70%;
+    --forest: 150 30% 25%;
+    --bark: 30 20% 30%;
+    --leaf-light: 100 40% 88%;
+    --moss: 100 25% 45%;
+    
+    /* Shadows - Solid (No Opacity) */
+    --shadow-soft: 0 4px 12px hsl(150 15% 15%);
+    --shadow-card: 0 8px 24px hsl(150 15% 15%);
+    --shadow-elevated: 0 16px 32px hsl(150 15% 15%);
+    --shadow-inner: inset 0 2px 4px hsl(150 15% 15%);
+    --shadow-glow: 0 0 40px hsl(122 39% 49%);
+    
+    /* 3D Depth */
+    --depth-1: 0 1px 2px hsl(150 15% 15%);
+    --depth-2: 0 2px 4px hsl(150 15% 15%), 0 4px 8px hsl(150 15% 15%);
+    --depth-3: 0 4px 8px hsl(150 15% 15%), 0 8px 16px hsl(150 15% 15%), 0 16px 32px hsl(150 15% 15%);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 240 6% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217 91% 60%;
+  }
+
+  .dark {
+    --background: 150 20% 8%;
+    --foreground: 45 30% 95%;
+
+    --card: 150 18% 12%;
+    --card-foreground: 45 30% 95%;
+
+    --popover: 150 18% 12%;
+    --popover-foreground: 45 30% 95%;
+
+    --primary: 122 39% 55%;
+    --primary-foreground: 150 20% 8%;
+
+    --secondary: 125 30% 45%;
+    --secondary-foreground: 45 30% 95%;
+
+    --muted: 150 15% 18%;
+    --muted-foreground: 150 10% 70%;
+
+    --accent: 122 35% 40%;
+    --accent-foreground: 45 30% 95%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 150 15% 20%;
+    --input: 150 15% 20%;
+    --ring: 122 39% 55%;
+    
+    --sidebar-background: 240 6% 10%;
+    --sidebar-foreground: 240 5% 96%;
+    --sidebar-primary: 224 76% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 240 5% 96%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    @apply font-bold tracking-tight text-foreground;
+  }
+
+  /* Premium Botanical Typography Utilities (Solid) */
+  .botanical-h1 {
+    @apply font-serif font-bold tracking-[0.01em] leading-[1.1] text-foreground;
+  }
+
+  .botanical-h2 {
+    @apply font-serif font-bold tracking-tight leading-[1.2] text-foreground;
+  }
+
+  .botanical-text {
+    @apply font-sans font-medium tracking-wide leading-relaxed text-foreground;
+  }
+}
+
+@layer components {
+  /* Solid Card (Replacing Glassmorphism) */
+  .glass-card {
+    @apply relative overflow-hidden rounded-xl bg-card border-2 border-border shadow-card;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Solid Button (Replacing Neumorphic) */
+  .neu-button {
+    @apply relative rounded-lg px-8 py-4 font-bold transition-all duration-300 bg-primary text-primary-foreground shadow-card border-none;
+  }
+
+  .neu-button:hover {
+    @apply bg-accent -translate-y-1;
+  }
+
+  .neu-button:active {
+    @apply translate-y-0 shadow-inner;
+  }
+
+  /* 3D Card Effect (Simplified) */
+  .card-3d {
+    @apply relative rounded-xl transition-all duration-300 bg-card border-2 border-border;
+  }
+
+  .card-3d:hover {
+    transform: translateY(-8px);
+    @apply shadow-elevated border-primary;
+  }
+
+  /* Organic Shapes (Simplified) */
+  .blob {
+    @apply rounded-3xl bg-primary;
+  }
+
+  /* Floating Animation (Simplified) */
+  .float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* Staggered Fade In (No Opacity Animation where possible, but fade in usually needs it) */
+  .fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Solid Text (Replacing Gradient Text) */
+  .gradient-text {
+    @apply text-primary font-bold;
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+    background-clip: initial;
+  }
+
+  /* Leaf Pattern Background (Removed Opacity) */
+  .leaf-pattern {
+    @apply bg-muted;
+    background-image: none;
+  }
+
+  /* Hover Scale */
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-2 shadow-elevated border-primary;
+  }
+}
+
+/* Custom Scrollbar (Solid) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded-none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-accent;
+}
+
+/* Selection Color (Solid) */
+::selection {
+  @apply bg-primary text-primary-foreground;
+}
+
+/* Marquee Animations (Keep) */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 40s linear infinite;
+}
+
