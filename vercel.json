@@ -1,0 +1,9 @@
+{
+  "rewrite_rules_explanation": "This configuration ensures that all requests are redirected to index.html, allowing React Router to handle the navigation and preventing 404 errors on page refresh or direct URL entry.",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
