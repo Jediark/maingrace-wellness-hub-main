@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { blogPosts as staticPosts } from "@/data/blogPosts";
+import { blogPosts as staticPosts, blogImages as dataImages } from "@/data/blogPosts";
 import { useBlogPosts } from "@/hooks/useSupabase";
 import { useState } from "react";
 import { ArrowRight, Calendar, Clock, Search, Loader2 } from "lucide-react";
@@ -19,6 +19,16 @@ const categories = [
   "Mental Wellness",
   "Natural Remedies",
 ];
+
+const getFallbackImage = (title: string): string => {
+  const t = title.toLowerCase();
+  if (t.includes("detox") || t.includes("liver") || t.includes("gut") || t.includes("digest") || t.includes("detoxification")) return dataImages.gut;
+  if (t.includes("sugar") || t.includes("diabetes") || t.includes("blood sugar")) return dataImages.diabetes;
+  if (t.includes("immune") || t.includes("strengthen") || t.includes("immunity") || t.includes("boost") || t.includes("season")) return dataImages.immune;
+  if (t.includes("sleep") || t.includes("insomnia") || t.includes("lullaby") || t.includes("rest") || t.includes("remedies for insomnia")) return dataImages.sleep;
+  if (t.includes("fertility") || t.includes("reproductive")) return dataImages.fertility;
+  return dataImages.wisdom;
+};
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState("All Posts");
@@ -108,7 +118,11 @@ const Blog = () => {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-24 h-24 rounded-full bg-primary/20" />
+                    <img 
+                      src={getFallbackImage(featuredPost.title)} 
+                      alt={featuredPost.title} 
+                      className="w-full h-full object-cover"
+                    />
                   )}
                 </div>
                 <div className="flex flex-col justify-center space-y-6">
@@ -171,7 +185,11 @@ const Blog = () => {
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                           ) : (
-                            <div className="w-16 h-16 rounded-full bg-primary/20" />
+                            <img
+                              src={getFallbackImage(post.title)}
+                              alt={post.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
                           )}
                         </div>
                         <div className="flex items-center gap-3 text-sm text-muted-foreground mb-2">

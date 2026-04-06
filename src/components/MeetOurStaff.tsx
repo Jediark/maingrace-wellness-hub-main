@@ -15,7 +15,7 @@ const staff = [
   {
     name: "Emmanuel Okon",
     role: "Sales Representative",
-    description: "Leading our formulation research and product expertise, Emmanuel ensures every botanical blend is optimized for potency, safety, and natural efficacy.",
+    description: "A results-driven sales professional with a passion for natural wellness. Emmanuel bridges the gap between our traditional healing solutions and the individuals who need them most, ensuring seamless access to our therapeutic botanical range.",
     image: staffHerbalist,
   },
   {

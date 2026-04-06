@@ -5,6 +5,15 @@ import blogGutHealth from "@/assets/blog-gut-health.png";
 import blogSleepRemedy from "@/assets/blog-sleep-remedy.png";
 import blogFertility from "@/assets/blog-fertility.png";
 
+export const blogImages = {
+  wisdom: blogHerbalWisdom,
+  immune: blogImmuneBoost,
+  diabetes: blogDiabetes,
+  gut: blogGutHealth,
+  sleep: blogSleepRemedy,
+  fertility: blogFertility
+};
+
 export interface BlogPost {
   id: number;
   slug: string;
