@@ -71,7 +71,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary mt-0.5" />
-                <span className="text-background/70">Lagos, Nigeria</span>
+                <span className="text-background/70 text-sm italic">Olowotedo/Ibadan ExpressWay, Ogun State Nigeria</span>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-primary mt-0.5" />

@@ -25,7 +25,7 @@ const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { data: dbPosts, isLoading } = useBlogPosts();
 
-  const blogPosts = dbPosts || staticPosts;
+  const blogPosts = (dbPosts && dbPosts.length > 0) ? dbPosts : staticPosts;
 
   const featuredPost = blogPosts.find(post => post.featured);
 

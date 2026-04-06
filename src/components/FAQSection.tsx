@@ -25,7 +25,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "Where is your clinical facility located?",
-    answer: "Our main sanctuary is located at Olowotedo/Oran Expressway, Lagos, Nigeria. We operate from 8:30 AM to 8:00 PM, Monday through Saturday, providing a serene environment for your healing journey.",
+    answer: "Our main sanctuary is located at Olowotedo/Ibadan ExpressWay, Ogun State Nigeria. We operate from 8:30 AM to 8:00 PM, Monday through Saturday, providing a serene environment for your healing journey.",
   },
 ];
 

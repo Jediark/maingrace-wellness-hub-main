@@ -3,6 +3,7 @@ import blogImmuneBoost from "@/assets/blog-immune-boost.png";
 import blogDiabetes from "@/assets/blog-diabetes.png";
 import blogGutHealth from "@/assets/blog-gut-health.png";
 import blogSleepRemedy from "@/assets/blog-sleep-remedy.png";
+import blogFertility from "@/assets/blog-fertility.png";
 
 export interface BlogPost {
   id: number;
@@ -268,6 +269,6 @@ export const blogPosts: BlogPost[] = [
     readTime: "9 min read",
     featured: false,
     tags: ["Fertility", "Reproductive Health", "Traditional Medicine", "Women's Health", "Men's Health"],
-    image: blogHerbalWisdom,
+    image: blogFertility,
   },
 ];
