@@ -326,14 +326,14 @@ const Services = () => {
             Book a consultation today and discover how our traditional medicine approaches 
             can help you achieve optimal health and wellness.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="xl" className="group" asChild>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-sm mx-auto sm:max-w-none">
+            <Button variant="hero" size="xl" className="w-full sm:w-auto group rounded-none" asChild>
               <Link to="/consultation">
                 Book Your Consultation
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
-            <Button variant="outline" size="xl" asChild>
+            <Button variant="outline" size="xl" className="w-full sm:w-auto rounded-none border-2 border-primary font-bold hover:bg-muted" asChild>
               <Link to="/remote-consultation">
                 Remote Consultation
               </Link>

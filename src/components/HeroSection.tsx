@@ -76,14 +76,14 @@ const HeroSection = () => {
           <p className="text-lg md:text-2xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed animate-in fade-in duration-1000 delay-300">
             {slides[currentSlide].description}
           </p>
-          <div className="flex flex-wrap justify-center gap-6 pt-8 animate-in fade-in slide-in-from-bottom duration-1000 delay-500">
-            <Button variant="hero" size="xl" className="group rounded-none bg-primary border-4 border-white shadow-elevated" asChild>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 pt-8 animate-in fade-in slide-in-from-bottom duration-1000 delay-500 max-w-sm mx-auto sm:max-w-none">
+            <Button variant="hero" size="xl" className="w-full sm:w-auto group rounded-none bg-primary border-4 border-white shadow-elevated" asChild>
               <Link to="/consultation">
                 Book Consultation
                 <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform" />
               </Link>
             </Button>
-            <Button variant="outline" size="xl" className="rounded-none border-4 border-white font-bold uppercase tracking-widest bg-transparent text-white hover:bg-white hover:text-primary transition-all shadow-elevated" asChild>
+            <Button variant="outline" size="xl" className="w-full sm:w-auto rounded-none border-4 border-white font-bold uppercase tracking-widest bg-transparent text-white hover:bg-white hover:text-primary transition-all shadow-elevated" asChild>
               <Link to="/shop">View Catalog</Link>
             </Button>
           </div>

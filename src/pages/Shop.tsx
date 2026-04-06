@@ -24,6 +24,13 @@ const Shop = () => {
     window.open(`https://wa.me/2347013376463?text=${message}`, "_blank");
   };
 
+  // Center active category on mobile
+  const scrollActiveIntoView = (e: React.MouseEvent<HTMLButtonElement>, category: string) => {
+    setSelectedCategory(category);
+    const target = e.currentTarget;
+    target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  };
+
   if (isLoading && !dbProducts) {
     return (
       <Layout>
@@ -66,12 +73,12 @@ const Shop = () => {
       <section className="py-20 lg:py-32 bg-muted relative overflow-hidden">
         <div className="container mx-auto px-4">
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
+          <div className="flex overflow-x-auto pb-4 mb-12 -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap md:justify-center gap-4 no-scrollbar scroll-smooth">
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-8 py-3 rounded-none text-sm font-bold uppercase tracking-widest transition-all duration-300 border-2 ${
+                onClick={(e) => scrollActiveIntoView(e, category)}
+                className={`flex-shrink-0 px-8 py-3 rounded-none text-xs md:text-sm font-bold uppercase tracking-widest transition-all duration-300 border-2 ${
                   selectedCategory === category
                     ? "bg-primary text-white border-primary shadow-elevated"
                     : "bg-white text-foreground border-border hover:border-primary hover:bg-muted"

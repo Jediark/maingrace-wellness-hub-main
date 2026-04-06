@@ -47,14 +47,14 @@ const CTASection = () => {
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-6 pt-4">
-              <Button variant="hero" size="xl" className="group rounded-none bg-primary border-4 border-white shadow-elevated" asChild>
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button variant="hero" size="xl" className="w-full sm:w-auto group rounded-none bg-primary border-4 border-white shadow-elevated" asChild>
                 <Link to="/consultation">
                   Schedule Consultation
                   <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform" />
                 </Link>
               </Button>
-              <Button variant="outline" size="xl" className="rounded-none border-4 border-primary font-bold uppercase tracking-widest" asChild>
+              <Button variant="outline" size="xl" className="w-full sm:w-auto rounded-none border-4 border-primary font-bold uppercase tracking-widest bg-white hover:bg-muted font-sans" asChild>
                 <Link to="/contact">Send Inquiry</Link>
               </Button>
             </div>

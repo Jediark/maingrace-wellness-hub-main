@@ -80,11 +80,11 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         <div
-          className={`lg:hidden overflow-hidden transition-all duration-300 ease-out ${
-            isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-          }`}
+          className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+            isOpen ? "max-h-[600px] opacity-100 py-6" : "max-h-0 opacity-0 py-0"
+          } bg-card/95 backdrop-blur-md`}
         >
-          <div className="py-4 space-y-2 border-t border-border/50">
+          <div className="container mx-auto px-4 space-y-4 border-t border-primary/20 pt-6">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
