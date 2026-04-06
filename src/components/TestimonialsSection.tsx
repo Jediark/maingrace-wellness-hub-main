@@ -30,7 +30,7 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <section id="testimonials" className="py-24 lg:py-32 bg-white relative overflow-hidden border-y-8 border-primary">
+    <section id="testimonials" className="py-24 lg:py-32 bg-background relative overflow-hidden border-y-8 border-primary">
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-20">
@@ -51,7 +51,7 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <Card 
               key={testimonial.name}
-              className="rounded-none bg-muted border-none shadow-card hover:bg-white transition-all duration-500 border-l-8 border-accent"
+              className="rounded-none bg-muted border-none shadow-card hover:bg-card transition-all duration-500 border-l-8 border-accent"
             >
               <CardContent className="p-10 md:p-12">
                 {/* Quote & Rating */}

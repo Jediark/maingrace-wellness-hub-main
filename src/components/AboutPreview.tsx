@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "lucide-react";
-import healingHandsImage from "@/assets/maingrace-logo.webp";
+import healingHandsImage from "@/assets/maingrace-logo-premium.png";
 
 const benefits = [
   "100% natural ingredients sourced ethically",
@@ -18,11 +18,11 @@ const AboutPreview = () => {
           {/* Image Side */}
           <div className="relative">
             {/* Main Image */}
-            <div className="relative rounded-xl overflow-hidden shadow-card border-2 border-primary">
+            <div className="relative rounded-xl overflow-hidden shadow-glow border-4 border-primary bg-accent/20 p-8 flex items-center justify-center">
               <img
                 src={healingHandsImage}
-                alt="Healing hands holding medicinal herbs"
-                className="w-full h-auto object-cover aspect-square"
+                alt="MAINGRACE GLOBAL - Nature's Signature"
+                className="w-full h-auto object-contain max-w-[80%]"
                 loading="lazy"
               />
             </div>

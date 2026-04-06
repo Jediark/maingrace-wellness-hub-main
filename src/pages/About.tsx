@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check, ArrowRight, Eye, Target, MapPin, Phone, Clock } from "lucide-react";
 import drGrace from "@/assets/dr-grace.png";
-import healingHandsImage from "@/assets/maingrace-logo.webp";
+import healingHandsImage from "@/assets/maingrace-logo-premium.png";
 import consultationImage from "@/assets/branded-herbal-shelf.png";
 import aboutHero from "@/assets/about-hero.png";
 import VideoSection from "@/components/VideoSection";
@@ -99,7 +99,7 @@ const About = () => {
                 />
               </div>
               
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-accent p-6 shadow-elevated text-primary-foreground border-4 border-white">
+              <div className="absolute -bottom-6 -right-6 bg-accent p-6 shadow-elevated text-primary-foreground border-4 border-white z-20">
                 <div className="text-center">
                   <span className="block text-4xl font-serif font-bold">15+</span>
                   <span className="text-sm font-bold uppercase tracking-widest">Years of Excellence</span>
@@ -213,11 +213,11 @@ const About = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Image Side */}
             <div className="relative order-2 lg:order-1">
-              <div className="relative rounded-none overflow-hidden shadow-elevated border-8 border-muted">
+              <div className="relative rounded-none overflow-hidden shadow-glow border-8 border-primary bg-accent/20 p-8 flex items-center justify-center">
                 <img
                   src={healingHandsImage}
-                  alt="Healing hands holding medicinal herbs"
-                  className="w-full h-auto object-cover aspect-square"
+                  alt="MAINGRACE GLOBAL - Nature's Signature"
+                  className="w-full h-auto object-contain max-w-[80%]"
                   loading="lazy"
                 />
               </div>

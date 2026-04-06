@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Leaf, Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import logo from "@/assets/maingrace-logo-premium.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,13 +15,11 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-6 group">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <Leaf className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-lg font-serif font-bold text-background">Maingrace247</span>
-                <span className="text-xs text-background/60 -mt-1">Tradomedical Service</span>
-              </div>
+  <img src={logo} alt="MAINGRACE GLOBAL" className="w-12 h-12 rounded-full object-cover shadow-card" />
+  <div className="flex flex-col">
+    <span className="text-xl font-serif font-bold text-background tracking-tight">MAINGRACE</span>
+    <span className="text-[0.65rem] text-primary font-bold uppercase tracking-[0.2em] -mt-1">GLOBAL LIMITED</span>
+  </div>
             </Link>
             <p className="text-background/70 leading-relaxed mb-6">
               Embracing the healing power of nature through traditional medicine and 

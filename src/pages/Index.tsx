@@ -11,6 +11,7 @@ import CTASection from "@/components/CTASection";
 import ParallaxSection from "@/components/ParallaxSection";
 import parallaxForest from "@/assets/parallax-forest.png";
 import parallaxHands from "@/assets/parallax-hands.png";
+import videoPoster from "@/assets/video-poster-clinical.png";
 
 const Index = () => {
   return (
@@ -29,6 +30,7 @@ const Index = () => {
         subtitle="Heritage & Healing"
         title="Ancestral Roots of Modern Wellness"
         videoUrl="/videos/detoxification-3.mp4"
+        posterImage={videoPoster}
         description="Witness the profound intersection of ancient botanical wisdom and contemporary clinical care. Our story is one of restoration, guided by the purest gifts of nature."
       />
 

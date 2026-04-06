@@ -3,7 +3,7 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
-import logo from "@/assets/maingrace-logo.webp";
+import logo from "@/assets/maingrace-logo-premium.png";
 
 const navLinks = [
   { name: "Home", href: "/" },

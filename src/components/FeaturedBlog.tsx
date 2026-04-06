@@ -20,7 +20,7 @@ const FeaturedBlog = () => {
               Health & <span className="text-primary italic">Botanical Research</span>
             </h2>
           </div>
-          <Button variant="outline" className="group self-start md:self-auto rounded-none border-4 border-primary font-bold uppercase tracking-widest bg-white" asChild>
+          <Button variant="outline" className="group self-start md:self-auto rounded-none border-4 border-primary font-bold uppercase tracking-widest bg-background dark:bg-card hover:bg-primary hover:text-white transition-all shadow-card" asChild>
             <Link to="/blog">
               Journal Archive
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -32,7 +32,7 @@ const FeaturedBlog = () => {
           {featuredPosts.map((post, index) => (
             <Card
               key={post.id}
-              className={`rounded-none border-none bg-white shadow-card flex flex-col group h-full ${index === 0 ? "md:col-span-2 lg:col-span-1" : ""}`}
+              className={`rounded-none border-none bg-card shadow-card flex flex-col group h-full ${index === 0 ? "md:col-span-2 lg:col-span-1" : ""}`}
             >
               <CardHeader className="p-0">
                 <div className="relative h-64 overflow-hidden border-b-4 border-primary">

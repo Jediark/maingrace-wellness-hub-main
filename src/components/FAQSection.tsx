@@ -33,7 +33,7 @@ const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 lg:py-32 bg-white relative overflow-hidden border-t-2 border-border">
+    <section className="py-24 lg:py-32 bg-background relative overflow-hidden border-t-2 border-border">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
@@ -56,7 +56,7 @@ const FAQSection = () => {
               <div 
                 key={index} 
                 className={`border-2 transition-all duration-300 ${
-                  openIndex === index ? "border-primary bg-muted/30" : "border-border bg-white"
+                  openIndex === index ? "border-primary bg-muted/30" : "border-border bg-card"
                 }`}
               >
                 <button
@@ -95,7 +95,7 @@ const FAQSection = () => {
               href="https://wa.me/2347013376463"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-white text-primary px-8 py-3 font-bold uppercase tracking-widest hover:bg-accent hover:text-white transition-all transform hover:-translate-y-1"
+              className="inline-block bg-background dark:bg-card text-primary px-8 py-3 font-bold uppercase tracking-widest hover:bg-accent hover:text-white transition-all transform hover:-translate-y-1 shadow-card"
             >
               Chat With a Practitioner
             </a>

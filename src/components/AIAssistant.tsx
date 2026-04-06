@@ -129,17 +129,18 @@ const AIAssistant = () => {
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground shadow-elevated flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+        className={`fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground shadow-elevated flex items-center justify-center transition-all duration-300 hover:scale-110 ambient-glow ${
           isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
         aria-label="Open chat"
       >
+        <div className="absolute inset-0 rounded-full animate-pulse bg-primary/20 dark:bg-primary/40 -z-10 group-hover:scale-150 transition-transform" />
         <MessageCircle className="w-7 h-7" />
       </button>
 
       {/* Chat Window */}
       <div
-        className={`fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-48px)] bg-card rounded-2xl shadow-elevated border border-border overflow-hidden transition-all duration-300 ${
+        className={`fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-48px)] bg-card rounded-2xl shadow-elevated border-2 border-primary/20 overflow-hidden transition-all duration-300 ${
           isOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"
@@ -175,8 +176,8 @@ const AIAssistant = () => {
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                   msg.role === "user"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted"
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "bg-muted text-foreground"
                 }`}
               >
                 {msg.role === "user" ? (

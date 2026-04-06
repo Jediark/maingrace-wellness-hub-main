@@ -58,7 +58,11 @@
     --shadow-card: 0 8px 24px hsl(150 15% 15%);
     --shadow-elevated: 0 16px 32px hsl(150 15% 15%);
     --shadow-inner: inset 0 2px 4px hsl(150 15% 15%);
-    --shadow-glow: 0 0 40px hsl(122 39% 49%);
+    --shadow-glow: 0 0 20px hsl(122 39% 49% / 0.4);
+    
+    /* Dark Shadows (Prepared for toggle) */
+    --shadow-soft-dark: 0 4px 20px hsl(150 20% 4% / 0.8);
+    --shadow-glow-dark: 0 0 30px hsl(122 39% 55% / 0.4);
     
     /* 3D Depth */
     --depth-1: 0 1px 2px hsl(150 15% 15%);
@@ -112,6 +116,11 @@
     --sidebar-accent-foreground: 240 5% 96%;
     --sidebar-border: 240 4% 16%;
     --sidebar-ring: 217 91% 60%;
+
+    --shadow-soft: var(--shadow-soft-dark);
+    --shadow-card: 0 8px 30px hsl(150 20% 4% / 0.9);
+    --shadow-elevated: 0 16px 40px hsl(150 20% 4%);
+    --shadow-glow: var(--shadow-glow-dark);
   }
 }
 
@@ -233,6 +242,15 @@
 
   .hover-lift:hover {
     @apply -translate-y-2 shadow-elevated border-primary;
+  }
+
+  /* Ambient Glow Utility */
+  .ambient-glow {
+    @apply shadow-glow transition-all duration-500;
+  }
+
+  .dark .ambient-glow {
+    filter: drop-shadow(0 0 15px hsl(var(--primary) / 0.3));
   }
 }
 

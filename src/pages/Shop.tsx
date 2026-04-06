@@ -91,7 +91,7 @@ const Shop = () => {
                 className={`flex-shrink-0 px-8 py-3 rounded-none text-xs md:text-sm font-bold uppercase tracking-widest transition-all duration-300 border-2 ${
                   selectedCategory === category
                     ? "bg-primary text-white border-primary shadow-elevated"
-                    : "bg-white text-foreground border-border hover:border-primary hover:bg-muted"
+                    : "bg-background dark:bg-card text-foreground border-border hover:border-primary hover:bg-muted"
                 }`}
               >
                 {category}
@@ -102,7 +102,7 @@ const Shop = () => {
           {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredProducts.map((product) => (
-              <Card key={product.id} className="rounded-none bg-white border-none shadow-card group h-full flex flex-col hover:border-r-8 hover:border-primary transition-all">
+              <Card key={product.id} className="rounded-none bg-card border-none shadow-card group h-full flex flex-col hover:border-r-8 hover:border-primary transition-all">
                 <CardHeader className="relative p-6">
                   {product.bestseller && (
                     <div className="absolute top-4 left-4 z-10 px-4 py-1 bg-accent text-white text-[10px] font-bold uppercase tracking-widest shadow-card">

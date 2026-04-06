@@ -28,7 +28,7 @@ const staff = [
 
 const MeetOurStaff = () => {
   return (
-    <section className="py-24 lg:py-32 bg-white relative">
+    <section className="py-24 lg:py-32 bg-background relative">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="max-w-3xl mb-16 lg:mb-24">
@@ -48,7 +48,7 @@ const MeetOurStaff = () => {
         {/* Staff Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {staff.map((member, index) => (
-            <div key={index} className="group bg-white border-2 border-border p-6 shadow-card hover:border-primary transition-all duration-300">
+            <div key={index} className="group bg-card border-2 border-border p-6 shadow-card hover:border-primary transition-all duration-300">
               {/* Image Container (Solid, No Overlays) */}
               <div className="aspect-[4/5] overflow-hidden grayscale-0 group-hover:grayscale-0 transition-all duration-500 mb-8 border-4 border-muted">
                 <img

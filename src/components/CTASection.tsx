@@ -5,7 +5,7 @@ import consultationImage from "@/assets/branded-herbal-shelf.png";
 
 const CTASection = () => {
   return (
-    <section className="py-20 lg:py-32 bg-white relative overflow-hidden border-t-8 border-primary">
+    <section className="py-20 lg:py-32 bg-background relative overflow-hidden border-t-8 border-primary">
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
@@ -54,7 +54,7 @@ const CTASection = () => {
                   <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform" />
                 </Link>
               </Button>
-              <Button variant="outline" size="xl" className="w-full sm:w-auto rounded-none border-4 border-primary font-bold uppercase tracking-widest bg-white hover:bg-muted font-sans" asChild>
+              <Button variant="outline" size="xl" className="w-full sm:w-auto rounded-none border-4 border-primary font-bold uppercase tracking-widest bg-background dark:bg-card hover:bg-muted font-sans" asChild>
                 <Link to="/contact">Send Inquiry</Link>
               </Button>
             </div>

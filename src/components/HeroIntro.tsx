@@ -4,7 +4,7 @@ import { ArrowRight, Leaf, Shield, Heart } from "lucide-react";
 
 const HeroIntro = () => {
   return (
-    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
@@ -53,7 +53,7 @@ const HeroIntro = () => {
               <h3 className="text-xl font-serif font-bold mb-3">Holistic Care</h3>
               <p className="text-white/80 font-medium">Every formula is prepared with meticulous care, focusing on total body restoration.</p>
             </div>
-            <div className="bg-white p-8 border-2 border-border shadow-card">
+            <div className="bg-card p-8 border-2 border-border shadow-card">
               <div className="flex items-center gap-2 mb-6">
                 <div className="w-3 h-3 bg-accent rounded-full" />
                 <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
