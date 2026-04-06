@@ -90,21 +90,6 @@ const HeroSection = () => {
         </div>
       </div>
       
-      {/* Solid Indicator dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-4">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`transition-all duration-300 h-2 border-2 border-white ${
-              index === currentSlide 
-                ? "bg-white w-12" 
-                : "bg-accent w-4"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
     </section>
   );
 };

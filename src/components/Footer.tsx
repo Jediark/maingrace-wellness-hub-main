@@ -87,8 +87,8 @@ const Footer = () => {
         
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-background/10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-background/60 text-sm">
-            © {currentYear} MAINGRACE GLOBAL LIMITED. All rights reserved.
+          <p className="text-background/60 text-sm italic">
+            © {currentYear} MAINGRACE GLOBAL LIMITED. All rights reserved. | Built by Trendtactics Digital
           </p>
           <div className="flex gap-6 text-sm">
             <Link to="/privacy" className="text-background/60 hover:text-primary transition-colors">Privacy Policy</Link>
