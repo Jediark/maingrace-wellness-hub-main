@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "lucide-react";
-import healingHandsImage from "@/assets/maingrace-logo-premium.png";
+import healingHandsImage from "@/assets/maingrace-logo.webp";
 
 const benefits = [
   "100% natural ingredients sourced ethically",
@@ -18,23 +18,15 @@ const AboutPreview = () => {
           {/* Image Side */}
           <div className="relative">
             {/* Main Image */}
-            <div className="relative rounded-xl overflow-hidden shadow-glow border-4 border-primary bg-accent/20 p-8 flex items-center justify-center">
+            <div className="relative rounded-xl overflow-hidden shadow-card border-2 border-primary">
               <img
                 src={healingHandsImage}
-                alt="MAINGRACE GLOBAL - Nature's Signature"
-                className="w-full h-auto object-contain max-w-[80%]"
+                alt="Healing hands holding medicinal herbs"
+                className="w-full h-auto object-cover aspect-square"
                 loading="lazy"
               />
             </div>
-            
-            {/* Experience Badge */}
-            <div className="absolute -bottom-6 -right-6 lg:-right-10 bg-accent rounded-none p-6 shadow-elevated text-primary-foreground border-2 border-white">
-              <div className="text-center">
-                <span className="block text-4xl font-serif font-bold">15+</span>
-                <span className="text-sm font-bold uppercase tracking-widest">Years of Excellence</span>
-              </div>
             </div>
-          </div>
           
           {/* Content Side */}
           <div className="space-y-8">
@@ -46,9 +38,10 @@ const AboutPreview = () => {
                 Rooted in Tradition, <span className="text-primary italic">Healing for Today</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed font-medium">
-                At MAINGRACE GLOBAL LIMITED, we believe in the profound healing power 
-                of nature. Our practice combines ancestral wisdom with modern understanding to 
-                provide you with safe, effective, and personalized natural health solutions.
+                I am your trusted Health and Herbal Consultant, dedicated to helping 
+                people care for their health naturally through detox, massage, blood 
+                pressure and blood sugar checks, simple health tests, diagnosis referrals, 
+                and herbal wellness support based on test results.
               </p>
             </div>
             

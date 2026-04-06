@@ -5,6 +5,7 @@ import ServicesMarquee from "@/components/ServicesMarquee";
 import AboutPreview from "@/components/AboutPreview";
 import MeetOurStaff from "@/components/MeetOurStaff";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import MarqueeBanner from "@/components/MarqueeBanner";
 import VideoSection from "@/components/VideoSection";
 import FeaturedBlog from "@/components/FeaturedBlog";
 import CTASection from "@/components/CTASection";
@@ -17,8 +18,8 @@ const Index = () => {
   return (
     <Layout>
       <HeroSection />
+      <MarqueeBanner />
       <HeroIntro />
-      <ServicesMarquee />
       <AboutPreview />
       
       {/* Immersive Parallax 1 - Pure Visual */}

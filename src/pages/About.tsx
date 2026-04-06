@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check, ArrowRight, Eye, Target, MapPin, Phone, Clock } from "lucide-react";
 import drGrace from "@/assets/dr-grace.png";
-import healingHandsImage from "@/assets/maingrace-logo-premium.png";
+import healingHandsImage from "@/assets/maingrace-logo.webp";
 import consultationImage from "@/assets/branded-herbal-shelf.png";
 import aboutHero from "@/assets/about-hero.png";
 import VideoSection from "@/components/VideoSection";
@@ -69,8 +69,8 @@ const About = () => {
               <span className="text-primary italic">Driven by Excellence</span>
             </h1>
             <p className="text-lg md:text-2xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed animate-in fade-in duration-1000 delay-300">
-              For over 15 years, MAINGRACE GLOBAL LIMITED has been at the forefront of 
-              natural healing, helping thousands discover the transformative power of traditional medicine.
+              Discover the transformative power of traditional medicine 
+              with MAINGRACE TRADOMEDICAL SERVICE.
             </p>
           </div>
         </div>
@@ -98,13 +98,6 @@ const About = () => {
                   loading="lazy"
                 />
               </div>
-              
-              <div className="absolute -bottom-6 -right-6 bg-accent p-6 shadow-elevated text-primary-foreground border-4 border-white z-20">
-                <div className="text-center">
-                  <span className="block text-4xl font-serif font-bold">15+</span>
-                  <span className="text-sm font-bold uppercase tracking-widest">Years of Excellence</span>
-                </div>
-              </div>
             </div>
             
             {/* Content Side */}
@@ -120,17 +113,10 @@ const About = () => {
                   Tradomedical Doctor & Founder, MAINGRACE GLOBAL LIMITED
                 </p>
                 <div className="space-y-6 text-muted-foreground leading-relaxed font-medium">
-                  <p>
-                    With over 15 years of dedicated practice in traditional medicine, Dr. Dawodu has 
-                    helped thousands of patients achieve optimal health through natural healing methods. 
-                    Her passion for preserving ancestral healing wisdom while making it accessible to 
-                    modern generations has been the driving force behind MAINGRACE GLOBAL LIMITED.
-                  </p>
-                  <p>
-                    She believes that for every human illness, there exists a plant which is the cure. 
-                    This philosophy guides every treatment and remedy prepared at our facility, ensuring 
-                    that patients receive care that is both effective and aligned with nature's healing principles.
-                  </p>
+                  I am your trusted Health and Herbal Consultant, dedicated to helping people 
+                  care for their health naturally through detox, massage, blood pressure and 
+                  blood sugar checks, simple health tests, diagnosis referrals, and herbal 
+                  wellness support based on test results.
                 </div>
               </div>
             </div>
@@ -213,11 +199,11 @@ const About = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Image Side */}
             <div className="relative order-2 lg:order-1">
-              <div className="relative rounded-none overflow-hidden shadow-glow border-8 border-primary bg-accent/20 p-8 flex items-center justify-center">
+              <div className="relative rounded-none overflow-hidden shadow-elevated border-8 border-muted">
                 <img
                   src={healingHandsImage}
-                  alt="MAINGRACE GLOBAL - Nature's Signature"
-                  className="w-full h-auto object-contain max-w-[80%]"
+                  alt="Healing hands holding medicinal herbs"
+                  className="w-full h-auto object-cover aspect-square"
                   loading="lazy"
                 />
               </div>
@@ -233,9 +219,10 @@ const About = () => {
                   Rooted in Tradition, <span className="text-primary italic">Healing for Today</span>
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed font-medium">
-                  At MAINGRACE GLOBAL LIMITED, we believe in the profound healing power of nature. Our practice 
-                  combines ancestral wisdom with modern understanding to provide you with safe, 
-                  effective, and personalized natural health solutions.
+                  I am your trusted Health and Herbal Consultant, dedicated to helping people 
+                  care for their health naturally through detox, massage, blood pressure and 
+                  blood sugar checks, simple health tests, diagnosis referrals, and herbal 
+                  wellness support based on test results.
                 </p>
               </div>
               

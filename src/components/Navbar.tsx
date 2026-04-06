@@ -3,7 +3,7 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
-import logo from "@/assets/maingrace-logo-premium.png";
+import logo from "@/assets/maingrace-logo.webp";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -30,7 +30,7 @@ const Navbar = () => {
             <img src={logo} alt="MAINGRACE GLOBAL" className="w-12 h-12 object-contain" />
             <div className="flex flex-col">
               <span className="text-lg font-serif font-bold text-foreground tracking-tight">MAINGRACE</span>
-              <span className="text-[0.65rem] text-primary font-bold uppercase tracking-[0.2em] -mt-1">GLOBAL LIMITED</span>
+              <span className="text-[0.65rem] text-primary font-bold uppercase tracking-[0.2em] -mt-1">TRADOMEDICAL SERVICE</span>
             </div>
           </Link>
 

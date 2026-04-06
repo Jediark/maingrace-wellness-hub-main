@@ -88,23 +88,6 @@ export const products: Product[] = [
     inStock: true,
   },
   {
-    id: 4,
-    name: "Goldlife Liver & Kidney Supplement",
-    category: "Detox",
-    rating: 4.6,
-    reviews: 78,
-    description: "Multi-cure dietary supplement that reduces cholesterol, reverses aging, boosts memory, strengthens bones, and supports liver and kidney health.",
-    features: [
-      "Reduces cholesterol",
-      "Liver detoxification",
-      "Kidney support",
-      "Boosts energy",
-    ],
-    image: liverKidney,
-    bestseller: false,
-    inStock: true,
-  },
-  {
     id: 5,
     name: "Women's Health Complete Pack",
     category: "Women's Health",

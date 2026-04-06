@@ -24,10 +24,9 @@ const Shop = () => {
 
   const products = dbProducts || staticProducts;
 
-  const filteredProducts =
-    selectedCategory === "All"
-      ? products
-      : products.filter((p) => p.category === selectedCategory);
+  const filteredProducts = products
+    .filter((p) => p.name !== "Goldlife Liver & Kidney Supplement")
+    .filter((p) => selectedCategory === "All" || p.category === selectedCategory);
 
   const handleGetQuote = (productName: string) => {
     const message = encodeURIComponent(`Hello MAINGRACE GLOBAL LIMITED, I'm interested in getting a quote for: ${productName}. Please provide more details.`);

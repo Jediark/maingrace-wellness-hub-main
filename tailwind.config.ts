@@ -121,6 +121,10 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "marquee": {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -132,6 +136,7 @@ export default {
         "float": "float 6s ease-in-out infinite",
         "pulse-gentle": "pulse-gentle 3s ease-in-out infinite",
         "shimmer": "shimmer 2s linear infinite",
+        "marquee": "marquee 30s linear infinite",
       },
       backgroundImage: {
         'gradient-hero': 'var(--gradient-hero)',
