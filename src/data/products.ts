@@ -4,6 +4,14 @@ import stdTreatment from "@/assets/product-std-treatment.png";
 import liverKidney from "@/assets/product-liver-kidney.png";
 import womensHealth from "@/assets/product-womens-health.png";
 
+export const productImages = {
+  herbalTonic,
+  mensHealth,
+  stdTreatment,
+  liverKidney,
+  womensHealth
+};
+
 export interface Product {
   id: number;
   name: string;

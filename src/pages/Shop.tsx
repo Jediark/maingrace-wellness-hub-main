@@ -3,12 +3,22 @@ import Layout from "@/components/Layout";
 import FAQSection from "@/components/FAQSection";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { products as staticProducts, categories } from "@/data/products";
+import { products as staticProducts, categories, productImages } from "@/data/products";
 import { useProducts } from "@/hooks/useSupabase";
 import { Star, Check, MessageSquare, ArrowRight, Loader2 } from "lucide-react";
 import productsDisplay from "@/assets/products-display.webp";
 
 const Shop = () => {
+  const getFallbackImage = (name: string) => {
+    const n = name.toLowerCase();
+    if (n.includes("tonic") || n.includes("immune") || n.includes("digestive")) return productImages.herbalTonic;
+    if (n.includes("men's") || n.includes("prostate") || n.includes("reproductive")) return productImages.mensHealth;
+    if (n.includes("std") || n.includes("pack")) return productImages.stdTreatment;
+    if (n.includes("liver") || n.includes("kidney") || n.includes("goldlife") || n.includes("detox")) return productImages.liverKidney;
+    if (n.includes("women's") || n.includes("fibroid") || n.includes("endometriosis")) return productImages.womensHealth;
+    return productImages.herbalTonic;
+  };
+
   const [selectedCategory, setSelectedCategory] = useState("All");
   const { data: dbProducts, isLoading, error } = useProducts();
 
@@ -101,8 +111,12 @@ const Shop = () => {
                   )}
                   <div className="w-full h-56 bg-muted flex items-center justify-center overflow-hidden mb-6 border-b-4 border-primary">
                     <img
-                      src={product.image}
+                      src={product.image || getFallbackImage(product.name)}
                       alt={product.name}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = getFallbackImage(product.name);
+                      }}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       loading="lazy"
                     />
