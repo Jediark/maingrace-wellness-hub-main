@@ -255,3 +255,75 @@ export const useDeleteBlogPost = () => {
   });
 };
 
+// --- Portfolio Videos ---
+
+export const usePortfolioVideos = () => {
+  return useQuery({
+    queryKey: ["portfolio_videos"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("portfolio_videos")
+        .select("*")
+        .order("created_at", { ascending: false });
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+};
+
+export const useAddPortfolioVideo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (video: any) => {
+      const { data, error } = await supabase
+        .from("portfolio_videos")
+        .insert([video])
+        .select();
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["portfolio_videos"] });
+    },
+  });
+};
+
+export const useUpdatePortfolioVideo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, ...updates }: { id: number; [key: string]: any }) => {
+      const { data, error } = await supabase
+        .from("portfolio_videos")
+        .update(updates)
+        .eq("id", id)
+        .select();
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["portfolio_videos"] });
+    },
+  });
+};
+
+export const useDeletePortfolioVideo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: number) => {
+      const { data, error } = await supabase
+        .from("portfolio_videos")
+        .delete()
+        .eq("id", id);
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["portfolio_videos"] });
+    },
+  });
+};
+

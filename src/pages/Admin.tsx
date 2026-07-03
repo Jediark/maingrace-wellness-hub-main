@@ -16,7 +16,11 @@ import {
   useDeleteProduct,
   useAddBlogPost,
   useUpdateBlogPost,
-  useDeleteBlogPost
+  useDeleteBlogPost,
+  usePortfolioVideos,
+  useAddPortfolioVideo,
+  useUpdatePortfolioVideo,
+  useDeletePortfolioVideo
 } from "@/hooks/useSupabase";
 import { 
   Plus, Edit2, Trash2, Loader2, Lock, Eye, Calendar, 
@@ -34,16 +38,18 @@ const Admin = () => {
 
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [activeTab, setActiveTab] = useState<"products" | "blogs" | "bookings" | "inquiries">("products");
+  const [activeTab, setActiveTab] = useState<"products" | "blogs" | "portfolio" | "bookings" | "inquiries">("products");
 
   // Admin CRUD states
   const [productForm, setProductForm] = useState<any>(null);
   const [blogForm, setBlogForm] = useState<any>(null);
+  const [videoForm, setVideoForm] = useState<any>(null);
   const [isUploading, setIsUploading] = useState(false);
 
   // Queries
   const { data: products, isLoading: isLoadingProducts, refetch: refetchProducts } = useProducts();
   const { data: blogs, isLoading: isLoadingBlogs, refetch: refetchBlogs } = useBlogPosts();
+  const { data: videos, isLoading: isLoadingVideos, refetch: refetchVideos } = usePortfolioVideos();
   const { data: bookings, isLoading: isLoadingBookings, refetch: refetchBookings } = useConsultationRequests();
   const { data: inquiries, isLoading: isLoadingInquiries, refetch: refetchInquiries } = useContactInquiries();
 
@@ -54,6 +60,9 @@ const Admin = () => {
   const addBlogMutation = useAddBlogPost();
   const updateBlogMutation = useUpdateBlogPost();
   const deleteBlogMutation = useDeleteBlogPost();
+  const addVideoMutation = useAddPortfolioVideo();
+  const updateVideoMutation = useUpdatePortfolioVideo();
+  const deleteVideoMutation = useDeletePortfolioVideo();
 
   // Pending bookings count
   const pendingBookingsCount = bookings?.filter((b: any) => b.status === "pending" || !b.status).length || 0;
@@ -114,7 +123,7 @@ const Admin = () => {
       } else if (type === "blog") {
         setBlogForm((prev: any) => ({ ...prev, image_url: publicUrlData.publicUrl }));
       } else if (type === "video") {
-        setBlogForm((prev: any) => ({ ...prev, video_url: publicUrlData.publicUrl }));
+        setVideoForm((prev: any) => ({ ...prev, video_url: publicUrlData.publicUrl }));
       }
       toast.success("File uploaded successfully!");
     } catch (err: any) {
@@ -171,7 +180,6 @@ const Admin = () => {
         date: blogForm.date || new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
         read_time: blogForm.read_time || "5 min read",
         image_url: blogForm.image_url,
-        video_url: blogForm.video_url || "",
         featured: blogForm.featured,
         tags: typeof blogForm.tags === "string" 
           ? blogForm.tags.split(",").map((t: string) => t.trim()).filter(Boolean)
@@ -188,6 +196,40 @@ const Admin = () => {
       setBlogForm(null);
     } catch (err) {
       toast.error("Failed to save blog post.");
+    }
+  };
+
+  // Video Submit
+  const handleVideoSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        title: videoForm.title,
+        description: videoForm.description || "",
+        video_url: videoForm.video_url || ""
+      };
+
+      if (videoForm.id) {
+        await updateVideoMutation.mutateAsync({ id: videoForm.id, ...payload });
+        toast.success("Video updated successfully!");
+      } else {
+        await addVideoMutation.mutateAsync(payload);
+        toast.success("Video added to gallery successfully!");
+      }
+      setVideoForm(null);
+    } catch (err) {
+      toast.error("Failed to save video.");
+    }
+  };
+
+  const deleteVideo = async (id: number) => {
+    if (confirm("Are you sure you want to delete this video from the gallery?")) {
+      try {
+        await deleteVideoMutation.mutateAsync(id);
+        toast.success("Video deleted successfully.");
+      } catch (err) {
+        toast.error("Failed to delete video.");
+      }
     }
   };
 
@@ -293,10 +335,10 @@ const Admin = () => {
 
           {/* Navigation Tabs */}
           <div className="flex overflow-x-auto gap-3 pb-4 mb-8 border-b border-border no-scrollbar">
-            {(["products", "blogs", "bookings", "inquiries"] as const).map((tab) => (
+            {(["products", "blogs", "portfolio", "bookings", "inquiries"] as const).map((tab) => (
               <button
                 key={tab}
-                onClick={() => { setActiveTab(tab); setProductForm(null); setBlogForm(null); }}
+                onClick={() => { setActiveTab(tab); setProductForm(null); setBlogForm(null); setVideoForm(null); }}
                 className={`px-6 py-3 rounded-none text-xs md:text-sm font-bold uppercase tracking-wider border-2 transition-all shrink-0 ${
                   activeTab === tab
                     ? "bg-primary text-white border-primary shadow-soft"
@@ -305,6 +347,7 @@ const Admin = () => {
               >
                 {tab === "products" && "📦 Products"}
                 {tab === "blogs" && "✍️ Blog Posts"}
+                {tab === "portfolio" && "🎬 Video Gallery"}
                 {tab === "bookings" && "📅 Consultations"}
                 {tab === "inquiries" && "💬 Inquiries"}
               </button>
@@ -744,54 +787,6 @@ const Admin = () => {
                           )}
                         </div>
 
-                        <div className="space-y-4 bg-muted/40 p-4 border border-border">
-                          <Label className="font-bold flex items-center gap-2">
-                            <FileText className="w-4 h-4 text-primary" /> Cover Video (Optional)
-                          </Label>
-                          <div className="grid md:grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              <Label htmlFor="blog-vid-url">Option 1: Paste Video URL (supports mp4 / YouTube)</Label>
-                              <Input 
-                                id="blog-vid-url" 
-                                value={blogForm.video_url || ""} 
-                                onChange={(e) => setBlogForm({ ...blogForm, video_url: e.target.value })}
-                                placeholder="https://example.com/video.mp4 or YouTube link"
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <Label htmlFor="blog-vid-file">Option 2: Upload Video File</Label>
-                              <Input 
-                                id="blog-vid-file" 
-                                type="file" 
-                                accept="video/*"
-                                onChange={(e) => handleFileUpload(e, "video")}
-                                disabled={isUploading}
-                                className="bg-background file:bg-primary file:text-white file:border-none file:px-3 file:py-1 hover:file:bg-accent file:mr-3 cursor-pointer"
-                              />
-                              {isUploading && <p className="text-xs text-primary font-bold flex items-center gap-2 mt-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading to Supabase Storage...</p>}
-                            </div>
-                          </div>
-                          {blogForm.video_url && (
-                            <div className="mt-4 border-2 border-border p-2 max-w-[300px] aspect-video bg-black flex items-center justify-center">
-                              {blogForm.video_url.includes("youtube.com") || blogForm.video_url.includes("youtu.be") ? (
-                                <iframe
-                                  src={
-                                    blogForm.video_url.includes("watch?v=")
-                                      ? blogForm.video_url.replace("watch?v=", "embed/").split("&")[0]
-                                      : blogForm.video_url.includes("youtu.be/")
-                                      ? `https://www.youtube.com/embed/${blogForm.video_url.split("youtu.be/")[1].split("?")[0]}`
-                                      : blogForm.video_url
-                                  }
-                                  className="w-full h-full border-none animate-in fade-in"
-                                  title="Video Preview"
-                                />
-                              ) : (
-                                <video src={blogForm.video_url} controls className="w-full h-full object-contain" />
-                              )}
-                            </div>
-                          )}
-                        </div>
-
                         <div className="flex gap-6">
                           <Label className="flex items-center gap-2 cursor-pointer font-bold select-none">
                             <input 
@@ -809,6 +804,182 @@ const Admin = () => {
                             {(addBlogMutation.isPending || updateBlogMutation.isPending) ? "Publishing..." : "Publish Article"}
                           </Button>
                           <Button type="button" variant="outline" className="rounded-none" onClick={() => setBlogForm(null)}>
+                            Cancel
+                          </Button>
+                        </div>
+                      </form>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            )}
+
+            {/* 🎬 VIDEO GALLERY PORTFOLIO TAB */}
+            {activeTab === "portfolio" && (
+              <div className="space-y-6">
+                {!videoForm ? (
+                  <div className="space-y-6">
+                    <div className="flex justify-between items-center bg-card p-6 border-2 border-border shadow-sm">
+                      <div>
+                        <h2 className="text-2xl font-serif font-bold">Video Gallery Portfolio</h2>
+                        <p className="text-sm font-semibold text-muted-foreground mt-1">Manage videos displayed on the portfolio page.</p>
+                      </div>
+                      <Button 
+                        variant="hero" 
+                        onClick={() => setVideoForm({ title: "", description: "", video_url: "" })}
+                        className="rounded-none font-bold"
+                      >
+                        <Plus className="w-5 h-5 mr-2" /> Add Video
+                      </Button>
+                    </div>
+
+                    {isLoadingVideos ? (
+                      <div className="flex justify-center py-20"><Loader2 className="w-12 h-12 text-primary animate-spin" /></div>
+                    ) : !videos || videos.length === 0 ? (
+                      <Card className="rounded-none border-2 border-border p-12 text-center text-muted-foreground font-semibold">
+                        No videos added to the gallery yet. Click "Add Video" to get started.
+                      </Card>
+                    ) : (
+                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {videos?.map((video: any) => {
+                          const isYouTube = video.video_url.includes("youtube.com") || video.video_url.includes("youtu.be");
+                          
+                          return (
+                            <Card key={video.id} className="rounded-none bg-card border-2 border-border shadow-card hover:border-primary transition-all flex flex-col justify-between">
+                              <div className="p-6 space-y-4">
+                                <div className="aspect-video bg-black flex items-center justify-center overflow-hidden border border-border">
+                                  {isYouTube ? (
+                                    <iframe
+                                      src={
+                                        video.video_url.includes("watch?v=")
+                                          ? video.video_url.replace("watch?v=", "embed/").split("&")[0]
+                                          : video.video_url.includes("youtu.be/")
+                                          ? `https://www.youtube.com/embed/${video.video_url.split("youtu.be/")[1].split("?")[0]}`
+                                          : video.video_url
+                                      }
+                                      className="w-full h-full border-none pointer-events-none"
+                                      title={video.title}
+                                    />
+                                  ) : (
+                                    <video src={video.video_url} className="w-full h-full object-cover" />
+                                  )}
+                                </div>
+                                <div>
+                                  <h3 className="text-xl font-serif font-bold line-clamp-2 mt-1">{video.title}</h3>
+                                  <p className="text-sm text-muted-foreground line-clamp-2 mt-2 font-medium">{video.description}</p>
+                                </div>
+                              </div>
+                              <div className="p-6 border-t border-border flex gap-2 bg-muted/30">
+                                <Button 
+                                  variant="outline" 
+                                  className="w-full rounded-none border-border"
+                                  onClick={() => setVideoForm({
+                                    id: video.id,
+                                    title: video.title,
+                                    description: video.description,
+                                    video_url: video.video_url
+                                  })}
+                                >
+                                  <Edit2 className="w-4 h-4 mr-2" /> Edit
+                                </Button>
+                                <Button 
+                                  variant="destructive" 
+                                  className="rounded-none bg-red-600 hover:bg-red-700 text-white border-none"
+                                  onClick={() => deleteVideo(video.id)}
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            </Card>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Card className="rounded-none border-4 border-primary">
+                    <CardHeader className="border-b-2 border-border bg-muted/10 p-6">
+                      <CardTitle className="text-2xl font-serif font-bold">
+                        {videoForm.id ? "Edit Video" : "Add New Video"}
+                      </CardTitle>
+                      <CardDescription className="font-semibold text-muted-foreground">
+                        Provide a title, description, and link or upload your raw video file.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      <form onSubmit={handleVideoSubmit} className="space-y-6">
+                        <div className="space-y-2">
+                          <Label htmlFor="vid-title">Video Title</Label>
+                          <Input 
+                            id="vid-title" 
+                            required 
+                            value={videoForm.title}
+                            onChange={(e) => setVideoForm({ ...videoForm, title: e.target.value })}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="vid-desc">Description</Label>
+                          <Textarea 
+                            id="vid-desc" 
+                            rows={3}
+                            value={videoForm.description || ""}
+                            onChange={(e) => setVideoForm({ ...videoForm, description: e.target.value })}
+                          />
+                        </div>
+
+                        <div className="space-y-4 bg-muted/40 p-4 border border-border">
+                          <Label className="font-bold flex items-center gap-2">
+                            <FileText className="w-4 h-4 text-primary" /> Video File or Link
+                          </Label>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <Label htmlFor="vid-url">Option 1: Paste Video/YouTube URL</Label>
+                              <Input 
+                                id="vid-url" 
+                                value={videoForm.video_url || ""} 
+                                onChange={(e) => setVideoForm({ ...videoForm, video_url: e.target.value })}
+                                placeholder="https://example.com/video.mp4 or YouTube link"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor="vid-file">Option 2: Upload Raw Video File</Label>
+                              <Input 
+                                id="vid-file" 
+                                type="file" 
+                                accept="video/*"
+                                onChange={(e) => handleFileUpload(e, "video")}
+                                disabled={isUploading}
+                                className="bg-background file:bg-primary file:text-white file:border-none file:px-3 file:py-1 hover:file:bg-accent file:mr-3 cursor-pointer"
+                              />
+                              {isUploading && <p className="text-xs text-primary font-bold flex items-center gap-2 mt-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading to Supabase Storage...</p>}
+                            </div>
+                          </div>
+                          {videoForm.video_url && (
+                            <div className="mt-4 border-2 border-border p-2 max-w-[300px] aspect-video bg-black flex items-center justify-center">
+                              {videoForm.video_url.includes("youtube.com") || videoForm.video_url.includes("youtu.be") ? (
+                                <iframe
+                                  src={
+                                    videoForm.video_url.includes("watch?v=")
+                                      ? videoForm.video_url.replace("watch?v=", "embed/").split("&")[0]
+                                      : videoForm.video_url.includes("youtu.be/")
+                                      ? `https://www.youtube.com/embed/${videoForm.video_url.split("youtu.be/")[1].split("?")[0]}`
+                                      : videoForm.video_url
+                                  }
+                                  className="w-full h-full border-none"
+                                  title="Video Preview"
+                                />
+                              ) : (
+                                <video src={videoForm.video_url} controls className="w-full h-full object-contain" />
+                              )}
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex gap-4">
+                          <Button type="submit" variant="hero" className="rounded-none font-bold" disabled={addVideoMutation.isPending || updateVideoMutation.isPending}>
+                            {(addVideoMutation.isPending || updateVideoMutation.isPending) ? "Saving..." : "Save Video"}
+                          </Button>
+                          <Button type="button" variant="outline" className="rounded-none" onClick={() => setVideoForm(null)}>
                             Cancel
                           </Button>
                         </div>

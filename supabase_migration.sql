@@ -100,3 +100,28 @@ VALUES
 ('boosting-immunity-through-the-seasons', 'Season Strengthening: Boosting Immunity Naturally', 'How to prepare your body''s defenses against common seasonal ailments using tradomedical tonics.', '<p>Immunity is not just about fighting off a cold; it is about the body''s overall resilience. Our seasonal immune tonics are formulated to strengthen the "internal guardian" using zinc-rich plants and natural antioxidants found in the Nigerian forest.</p>', 'Wellness Tips', 'Victoria Adeyemi', 'Sales Representative', 'January 25, 2026', '5 min read', false, '{"Immunity", "Prevention", "Tonics", "Health"}', '/images/blog/blog-immune-boost.png'),
 
 ('herbal-remedies-for-restful-sleep', 'Nature''s Lullaby: Herbal Remedies for Insomnia', 'Discover the calming power of natural sedatives that help you achieve deep, restorative sleep without dependency.', '<p>Quality sleep is the cornerstone of healing. When the nervous system is overwrought, we turn to calming leaves that soothe the mind and prepare the body for repair.</p>', 'Sleep Health', 'Dr. (Mrs) Folashade Adetifa Dawodu', 'Founder & Chief Herbalist', 'February 2, 2026', '7 min read', false, '{"Sleep", "Insomnia", "Natural Sedatives", "Relaxation"}', '/images/blog/blog-sleep-remedy.png');
+
+-- Portfolio Videos Table
+CREATE TABLE IF NOT EXISTS portfolio_videos (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT,
+  video_url TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Enable RLS for Portfolio Videos
+ALTER TABLE portfolio_videos ENABLE ROW LEVEL SECURITY;
+
+-- Policies for Portfolio Videos
+DROP POLICY IF EXISTS "Public Read Portfolio Videos" ON portfolio_videos;
+CREATE POLICY "Public Read Portfolio Videos" ON portfolio_videos FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public Insert Portfolio Videos" ON portfolio_videos;
+CREATE POLICY "Public Insert Portfolio Videos" ON portfolio_videos FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public Update Portfolio Videos" ON portfolio_videos;
+CREATE POLICY "Public Update Portfolio Videos" ON portfolio_videos FOR UPDATE USING (true);
+
+DROP POLICY IF EXISTS "Public Delete Portfolio Videos" ON portfolio_videos;
+CREATE POLICY "Public Delete Portfolio Videos" ON portfolio_videos FOR DELETE USING (true);

@@ -116,33 +116,8 @@ const BlogPost = () => {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main Content */}
             <article className="lg:col-span-2 space-y-8">
-              {/* Media Section (Video or Image) */}
-              {post.video_url ? (
-                <div className="relative aspect-video rounded-none overflow-hidden shadow-card border-4 border-primary bg-black">
-                  {post.video_url.includes("youtube.com") || post.video_url.includes("youtu.be") ? (
-                    <iframe
-                      src={
-                        post.video_url.includes("watch?v=")
-                          ? post.video_url.replace("watch?v=", "embed/").split("&")[0]
-                          : post.video_url.includes("youtu.be/")
-                          ? `https://www.youtube.com/embed/${post.video_url.split("youtu.be/")[1].split("?")[0]}`
-                          : post.video_url
-                      }
-                      className="w-full h-full border-none"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title={post.title}
-                    />
-                  ) : (
-                    <video
-                      src={post.video_url}
-                      controls
-                      className="w-full h-full object-cover"
-                      poster={post.image_url}
-                    />
-                  )}
-                </div>
-              ) : post.image_url ? (
+              {/* Media Section (Image) */}
+              {post.image_url ? (
                 <div className="relative aspect-video rounded-none overflow-hidden shadow-card border-4 border-primary bg-muted">
                   <img
                     src={post.image_url}
