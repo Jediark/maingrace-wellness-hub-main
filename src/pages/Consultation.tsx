@@ -75,7 +75,23 @@ const Consultation = () => {
         description: "We will contact you within 24 hours to confirm your appointment.",
       });
 
-      // Store submitted data for WhatsApp redirect
+      // Construct and open WhatsApp link immediately
+      const message = [
+        `Hello MAINGRACE GLOBAL LIMITED, I would like to book a consultation.`,
+        ``,
+        `*Name:* ${formData.name}`,
+        `*Phone:* ${formData.phone}`,
+        `*Email:* ${formData.email}`,
+        `*Consultation Type:* ${selectedType}`,
+        `*Preferred Date:* ${formData.date}`,
+        `*Preferred Time:* ${formData.time}`,
+        formData.concerns ? `*Health Concerns:* ${formData.concerns}` : "",
+      ].filter(Boolean).join("\n");
+      
+      const whatsappUrl = `https://wa.me/2347013376463?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+
+      // Store submitted data for success screen backup
       setSubmittedData({ ...formData });
       setSubmittedType(selectedType);
       setSubmitted(true);

@@ -57,25 +57,48 @@ const RemoteConsultation = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // Construct and open WhatsApp link with all remote consultation details
+      const message = [
+        `Hello MAINGRACE GLOBAL LIMITED, I would like to request a remote consultation.`,
+        ``,
+        `*Name:* ${formData.fullName}`,
+        `*Age / Gender:* ${formData.age} / ${formData.gender}`,
+        `*Phone:* ${formData.phone}`,
+        `*Email:* ${formData.email}`,
+        `*Location:* ${formData.location}`,
+        `*Symptoms:* ${formData.symptoms}`,
+        `*Duration:* ${formData.duration}`,
+        formData.medications ? `*Current Medications:* ${formData.medications}` : "",
+        formData.medicalHistory ? `*Medical History:* ${formData.medicalHistory}` : "",
+      ].filter(Boolean).join("\n");
 
-    toast.success(
-      "Your consultation request has been submitted! Our team will review your case and contact you within 24 hours."
-    );
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      age: "",
-      gender: "",
-      location: "",
-      symptoms: "",
-      duration: "",
-      medications: "",
-      medicalHistory: "",
-    });
-    setImages([]);
-    setIsSubmitting(false);
+      const whatsappUrl = `https://wa.me/2347013376463?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+
+      toast.success(
+        "Consultation request prepared! Redirecting you to WhatsApp to complete your message."
+      );
+
+      // Reset form
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        age: "",
+        gender: "",
+        location: "",
+        symptoms: "",
+        duration: "",
+        medications: "",
+        medicalHistory: "",
+      });
+      setImages([]);
+    } catch (error) {
+      toast.error("An error occurred. Please try again or chat with us directly on WhatsApp.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
