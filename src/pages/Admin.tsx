@@ -97,7 +97,7 @@ const Admin = () => {
       // Upload directly to lowercase 'images' bucket
       const uploadResult = await supabase.storage
         .from("images")
-        .upload(filePath, file, { cacheControl: "3600", upsert: true });
+        .upload(filePath, file, { cacheControl: "3600", upsert: false });
 
       if (uploadResult.error) {
         throw new Error(
