@@ -30,7 +30,15 @@ const getFallbackImage = (title: string): string => {
   return dataImages.wisdom;
 };
 
+import { useSEO } from "@/hooks/useSEO";
+
 const Blog = () => {
+  useSEO({
+    title: "Health Blog | Traditional Medicine & Herbal Wisdom",
+    description: "Read our articles on natural treatments, wellness guides, liver health detox, sleep care, and fertility boosts from Maingrace Tradomedical.",
+    keywords: "herbal medicine articles, natural health blog nigeria, wellness tips, traditional african remedies"
+  });
+
   const [activeCategory, setActiveCategory] = useState("All Posts");
   const [searchQuery, setSearchQuery] = useState("");
   const { data: dbPosts, isLoading } = useBlogPosts();

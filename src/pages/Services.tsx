@@ -104,7 +104,15 @@ const getCategoryColor = (category: string) => {
   return colors[category] || "bg-gray-100 text-gray-700";
 };
 
+import { useSEO } from "@/hooks/useSEO";
+
 const Services = () => {
+  useSEO({
+    title: "Holistic Health Services & Natural Healing Ailments",
+    description: "Explore our range of natural treatments, body detoxification, blood pressure checks, and holistic consultations for chronic diseases.",
+    keywords: "fibroid herbal treatment, malaria typhoid cure, prostate natural solution, body system detox, fertility booster"
+  });
+
   return (
     <Layout>
       {/* Hero Section */}

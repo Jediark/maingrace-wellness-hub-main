@@ -47,7 +47,15 @@ const coreValues = [
   },
 ];
 
+import { useSEO } from "@/hooks/useSEO";
+
 const About = () => {
+  useSEO({
+    title: "About Our Healing Heritage & Founder",
+    description: "Learn about MAINGRACE TRADOMEDICAL SERVICE and Dr. (Mrs) Folashade Adetifa Dawodu's natural healing mission.",
+    keywords: "herbalist founder, folashade dawodu, traditional african healer, botanical medicine lagos"
+  });
+
   return (
     <Layout>
       {/* Hero Section - Content Overlay (Aligned with Services Pattern) */}

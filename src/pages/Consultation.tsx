@@ -11,6 +11,7 @@ import { Calendar, Clock, User, Phone, Mail, Check, Stethoscope, Video, Home, Me
 import { useToast } from "@/hooks/use-toast";
 import { useSubmitConsultation } from "@/hooks/useSupabase";
 import healingHandsImage from "@/assets/healing-hands.webp";
+import { useSEO } from "@/hooks/useSEO";
 
 const consultationTypes = [
   {
@@ -23,7 +24,7 @@ const consultationTypes = [
   {
     icon: Video,
     title: "Virtual Consultation",
-    description: "Connect with our herbalist from the comfort of your home via video call.",
+    description: "Connect with our holistic health consultant from the comfort of your home via video call.",
     duration: "45 minutes",
     price: "₦10,000",
   },
@@ -37,6 +38,12 @@ const consultationTypes = [
 ];
 
 const Consultation = () => {
+  useSEO({
+    title: "Book a Consultation | Holistic Health & Natural Healing",
+    description: "Schedule your personal or virtual session with our holistic health consultant. Choose from in-person, virtual, or home visits.",
+    keywords: "holistic health consultant, book herbalist, virtual medical check, natural healing consultation lagos"
+  });
+
   const { toast } = useToast();
   const mutation = useSubmitConsultation();
   const [selectedType, setSelectedType] = useState<string | null>(null);

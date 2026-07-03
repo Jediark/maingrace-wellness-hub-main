@@ -58,6 +58,13 @@ export const useSubmitConsultation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (formData: any) => {
+      const messageContent = formData.message || [
+        `Type: ${formData.type || "General"}`,
+        formData.date ? `Preferred Date: ${formData.date}` : "",
+        formData.time ? `Preferred Time: ${formData.time}` : "",
+        formData.concerns ? `Concerns/Intake: ${formData.concerns}` : ""
+      ].filter(Boolean).join("\n");
+
       const { data, error } = await supabase
         .from("consultation_requests")
         .insert([
@@ -65,7 +72,7 @@ export const useSubmitConsultation = () => {
             patient_name: formData.name,
             email: formData.email,
             phone: formData.phone,
-            message: formData.message,
+            message: messageContent,
           },
         ]);
       

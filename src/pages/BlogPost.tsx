@@ -10,6 +10,7 @@ import { Calendar, User, Clock, ArrowLeft, MessageCircle, Share2, Facebook, Twit
 import { toast } from "sonner";
 import drGrace from "@/assets/dr-grace.png";
 import heroBg from "@/assets/hero-bg.webp";
+import { useSEO } from "@/hooks/useSEO";
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -19,6 +20,12 @@ const BlogPost = () => {
   const blogPosts = dbPosts || staticPosts;
   const post = dbPost || staticPosts.find((p) => p.slug === slug);
   
+  useSEO({
+    title: post?.title || "Blog Post",
+    description: post?.excerpt || "Read our latest article on natural healing and traditional African medicine.",
+    keywords: post?.tags ? (Array.isArray(post.tags) ? post.tags.join(", ") : post.tags) : "herbal medicine, blog, health tips"
+  });
+
   const [comment, setComment] = useState({ name: "", email: "", message: "" });
 
   if (isLoading && !dbPost) {
@@ -108,9 +115,48 @@ const BlogPost = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main Content */}
-            <article className="lg:col-span-2">
+            <article className="lg:col-span-2 space-y-8">
+              {/* Media Section (Video or Image) */}
+              {post.video_url ? (
+                <div className="relative aspect-video rounded-none overflow-hidden shadow-card border-4 border-primary bg-black">
+                  {post.video_url.includes("youtube.com") || post.video_url.includes("youtu.be") ? (
+                    <iframe
+                      src={
+                        post.video_url.includes("watch?v=")
+                          ? post.video_url.replace("watch?v=", "embed/").split("&")[0]
+                          : post.video_url.includes("youtu.be/")
+                          ? `https://www.youtube.com/embed/${post.video_url.split("youtu.be/")[1].split("?")[0]}`
+                          : post.video_url
+                      }
+                      className="w-full h-full border-none"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title={post.title}
+                    />
+                  ) : (
+                    <video
+                      src={post.video_url}
+                      controls
+                      className="w-full h-full object-cover"
+                      poster={post.image_url}
+                    />
+                  )}
+                </div>
+              ) : post.image_url ? (
+                <div className="relative aspect-video rounded-none overflow-hidden shadow-card border-4 border-primary bg-muted">
+                  <img
+                    src={post.image_url}
+                    alt={post.title}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "/images/blog/blog-herbal-wisdom.png";
+                    }}
+                  />
+                </div>
+              ) : null}
+
               <div
-                className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground"
+                className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground mt-6"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
 

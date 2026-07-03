@@ -13,8 +13,15 @@ import ParallaxSection from "@/components/ParallaxSection";
 import parallaxForest from "@/assets/parallax-forest.png";
 import parallaxHands from "@/assets/parallax-hands.png";
 import videoPoster from "@/assets/video-poster-clinical.png";
+import { useSEO } from "@/hooks/useSEO";
 
 const Index = () => {
+  useSEO({
+    title: "Pure Botanical Healing & Natural Remedies",
+    description: "Welcome to MAINGRACE TRADOMEDICAL SERVICE. Discover natural wellness and professional herbal consultation based on custom diagnosis checks.",
+    keywords: "traditional medicine, herbal clinic, natural remedies nigeria, detox massage, blood pressure check"
+  });
+
   return (
     <Layout>
       <HeroSection />

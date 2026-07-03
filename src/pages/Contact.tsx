@@ -34,7 +34,15 @@ const contactInfo = [
   },
 ];
 
+import { useSEO } from "@/hooks/useSEO";
+
 const Contact = () => {
+  useSEO({
+    title: "Contact Us | Location, Phone & Opening Hours",
+    description: "Get in touch with MAINGRACE TRADOMEDICAL SERVICE. Visit our branch on Olowotedo/Ibadan ExpressWay or call us at +2347013376463.",
+    keywords: "contact maingrace, herbal center location, phone number tradomedical, message herbal doctor"
+  });
+
   const { toast } = useToast();
   const mutation = useSubmitInquiry();
   const [formData, setFormData] = useState({

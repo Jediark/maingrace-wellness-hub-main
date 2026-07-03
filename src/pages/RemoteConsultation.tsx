@@ -8,8 +8,17 @@ import { toast } from "sonner";
 import { X, Camera, FileText, Shield, Clock, MapPin } from "lucide-react";
 import drGrace from "@/assets/dr-grace.png";
 import heroBg from "@/assets/hero-bg.webp";
+import { useSubmitConsultation } from "@/hooks/useSupabase";
+import { useSEO } from "@/hooks/useSEO";
 
 const RemoteConsultation = () => {
+  useSEO({
+    title: "Remote Consultation | Online Diagnosis & Natural Healing",
+    description: "Submit your symptoms and medical history online for a personalized traditional medicine health review by Dr. Folashade.",
+    keywords: "online consultation, tradomedical diagnosis, natural healing remote, herbal treatment online, symptom checker nigeria"
+  });
+
+  const submitConsultation = useSubmitConsultation();
   const [images, setImages] = useState<{ file: File; preview: string }[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -20,6 +29,7 @@ const RemoteConsultation = () => {
     age: "",
     gender: "",
     location: "",
+
     symptoms: "",
     duration: "",
     medications: "",
@@ -58,6 +68,22 @@ const RemoteConsultation = () => {
     setIsSubmitting(true);
 
     try {
+      // Save details to database
+      await submitConsultation.mutateAsync({
+        name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        type: "Remote Consultation",
+        concerns: [
+          `Age/Gender: ${formData.age} / ${formData.gender}`,
+          `Location: ${formData.location}`,
+          `Symptoms: ${formData.symptoms}`,
+          `Duration: ${formData.duration}`,
+          formData.medications ? `Medications: ${formData.medications}` : "",
+          formData.medicalHistory ? `Medical History: ${formData.medicalHistory}` : ""
+        ].filter(Boolean).join("\n")
+      });
+
       // Construct and open WhatsApp link with all remote consultation details
       const message = [
         `Hello MAINGRACE GLOBAL LIMITED, I would like to request a remote consultation.`,

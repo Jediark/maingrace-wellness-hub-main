@@ -8,7 +8,15 @@ import { useProducts } from "@/hooks/useSupabase";
 import { Star, Check, MessageSquare, ArrowRight, Loader2 } from "lucide-react";
 import productsDisplay from "@/assets/products-display.webp";
 
+import { useSEO } from "@/hooks/useSEO";
+
 const Shop = () => {
+  useSEO({
+    title: "Organic Herbal Products & Remedy Packs",
+    description: "Browse our premium selection of traditional herbal remedies including immunity tonics, men's & women's health packages, and STD treatments.",
+    keywords: "herbal immune booster, standard treatment pack lagos, buy natural remedy online, organic supplement"
+  });
+
   const getFallbackImage = (name: string) => {
     const n = name.toLowerCase();
     if (n.includes("tonic") || n.includes("immune") || n.includes("digestive")) return productImages.herbalTonic;

@@ -20,11 +20,18 @@ import {
 } from "@/hooks/useSupabase";
 import { 
   Plus, Edit2, Trash2, Loader2, Lock, Eye, Calendar, 
-  Mail, Phone, User, Image, FileText, Settings, RefreshCw, MessageSquare
+  Mail, Phone, User, Image, FileText, Settings, RefreshCw, MessageSquare, Bell
 } from "lucide-react";
 import { toast } from "sonner";
+import { useSEO } from "@/hooks/useSEO";
 
 const Admin = () => {
+  useSEO({
+    title: "Admin Portal | Maingrace Manager",
+    description: "Manage products, blog posts, consultations, and contact inquiries for Maingrace Tradomedical Service.",
+    keywords: "admin dashboard, maingrace manager"
+  });
+
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState<"products" | "blogs" | "bookings" | "inquiries">("products");
@@ -47,6 +54,10 @@ const Admin = () => {
   const addBlogMutation = useAddBlogPost();
   const updateBlogMutation = useUpdateBlogPost();
   const deleteBlogMutation = useDeleteBlogPost();
+
+  // Pending bookings count
+  const pendingBookingsCount = bookings?.filter((b: any) => b.status === "pending" || !b.status).length || 0;
+
 
   useEffect(() => {
     const isAuth = sessionStorage.getItem("maingrace_admin_authenticated") === "true";
@@ -72,8 +83,8 @@ const Admin = () => {
     toast.success("Logged out successfully.");
   };
 
-  // Image Upload Helper
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: "product" | "blog") => {
+  // File Upload Helper
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: "product" | "blog" | "video") => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -81,7 +92,7 @@ const Admin = () => {
     try {
       const fileExt = file.name.split(".").pop();
       const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
-      const filePath = `${type}s/${fileName}`;
+      const filePath = `${type === "video" ? "videos" : `${type}s`}/${fileName}`;
 
       // Try uppercase 'IMAGES' bucket first, fallback to lowercase 'images'
       let uploadResult = await supabase.storage
@@ -110,13 +121,15 @@ const Admin = () => {
 
       if (type === "product") {
         setProductForm((prev: any) => ({ ...prev, image: publicUrlData.publicUrl }));
-      } else {
+      } else if (type === "blog") {
         setBlogForm((prev: any) => ({ ...prev, image_url: publicUrlData.publicUrl }));
+      } else if (type === "video") {
+        setBlogForm((prev: any) => ({ ...prev, video_url: publicUrlData.publicUrl }));
       }
-      toast.success("Image uploaded successfully!");
+      toast.success("File uploaded successfully!");
     } catch (err: any) {
       console.error(err);
-      toast.error(err.message || "Failed to upload image. Please try pasting a direct image URL instead.");
+      toast.error(err.message || "Failed to upload file. Please try pasting a direct file URL instead.");
     } finally {
       setIsUploading(false);
     }
@@ -168,6 +181,7 @@ const Admin = () => {
         date: blogForm.date || new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
         read_time: blogForm.read_time || "5 min read",
         image_url: blogForm.image_url,
+        video_url: blogForm.video_url || "",
         featured: blogForm.featured,
         tags: typeof blogForm.tags === "string" 
           ? blogForm.tags.split(",").map((t: string) => t.trim()).filter(Boolean)
@@ -262,7 +276,21 @@ const Admin = () => {
                 Maingrace247 <span className="text-primary italic">Manager</span>
               </h1>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
+              {/* Notification Bell */}
+              <button 
+                onClick={() => { setActiveTab("bookings"); toast.info(`You have ${pendingBookingsCount} pending consultation bookings.`); }}
+                className="relative p-2.5 bg-background border-2 border-border hover:border-primary text-foreground transition-all duration-300 shadow-sm"
+                title={`${pendingBookingsCount} pending bookings`}
+              >
+                <Bell className="w-5 h-5 animate-pulse-gentle" />
+                {pendingBookingsCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-600 text-white text-[10px] font-bold flex items-center justify-center rounded-full animate-bounce">
+                    {pendingBookingsCount}
+                  </span>
+                )}
+              </button>
+
               <Button 
                 variant="outline" 
                 onClick={handleLogout}
@@ -528,7 +556,7 @@ const Admin = () => {
                       </div>
                       <Button 
                         variant="hero" 
-                        onClick={() => setBlogForm({ title: "", slug: "", excerpt: "", content: "", category: "Wellness Tips", author: "Dr. (Mrs) Folashade Adetifa Dawodu", author_role: "Founder & Chief Herbalist", image_url: "", featured: false, tags: "" })}
+                        onClick={() => setBlogForm({ title: "", slug: "", excerpt: "", content: "", category: "Wellness Tips", author: "Dr. (Mrs) Folashade Adetifa Dawodu", author_role: "Founder & Chief Herbalist", image_url: "", video_url: "", featured: false, tags: "" })}
                         className="rounded-none font-bold"
                       >
                         <Plus className="w-5 h-5 mr-2" /> Write Article
@@ -574,6 +602,7 @@ const Admin = () => {
                                   date: blog.date,
                                   read_time: blog.read_time,
                                   image_url: blog.image_url,
+                                  video_url: blog.video_url || "",
                                   featured: blog.featured,
                                   tags: Array.isArray(blog.tags) ? blog.tags.join(", ") : blog.tags
                                 })}
@@ -725,6 +754,54 @@ const Admin = () => {
                           )}
                         </div>
 
+                        <div className="space-y-4 bg-muted/40 p-4 border border-border">
+                          <Label className="font-bold flex items-center gap-2">
+                            <FileText className="w-4 h-4 text-primary" /> Cover Video (Optional)
+                          </Label>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <Label htmlFor="blog-vid-url">Option 1: Paste Video URL (supports mp4 / YouTube)</Label>
+                              <Input 
+                                id="blog-vid-url" 
+                                value={blogForm.video_url || ""} 
+                                onChange={(e) => setBlogForm({ ...blogForm, video_url: e.target.value })}
+                                placeholder="https://example.com/video.mp4 or YouTube link"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor="blog-vid-file">Option 2: Upload Video File</Label>
+                              <Input 
+                                id="blog-vid-file" 
+                                type="file" 
+                                accept="video/*"
+                                onChange={(e) => handleFileUpload(e, "video")}
+                                disabled={isUploading}
+                                className="bg-background file:bg-primary file:text-white file:border-none file:px-3 file:py-1 hover:file:bg-accent file:mr-3 cursor-pointer"
+                              />
+                              {isUploading && <p className="text-xs text-primary font-bold flex items-center gap-2 mt-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading to Supabase Storage...</p>}
+                            </div>
+                          </div>
+                          {blogForm.video_url && (
+                            <div className="mt-4 border-2 border-border p-2 max-w-[300px] aspect-video bg-black flex items-center justify-center">
+                              {blogForm.video_url.includes("youtube.com") || blogForm.video_url.includes("youtu.be") ? (
+                                <iframe
+                                  src={
+                                    blogForm.video_url.includes("watch?v=")
+                                      ? blogForm.video_url.replace("watch?v=", "embed/").split("&")[0]
+                                      : blogForm.video_url.includes("youtu.be/")
+                                      ? `https://www.youtube.com/embed/${blogForm.video_url.split("youtu.be/")[1].split("?")[0]}`
+                                      : blogForm.video_url
+                                  }
+                                  className="w-full h-full border-none animate-in fade-in"
+                                  title="Video Preview"
+                                />
+                              ) : (
+                                <video src={blogForm.video_url} controls className="w-full h-full object-contain" />
+                              )}
+                            </div>
+                          )}
+                        </div>
+
                         <div className="flex gap-6">
                           <Label className="flex items-center gap-2 cursor-pointer font-bold select-none">
                             <input 
@@ -805,7 +882,7 @@ const Admin = () => {
                                   {booking.time && <div className="flex items-center gap-1.5"><RefreshCw className="w-3.5 h-3.5 text-primary" /> {booking.time}</div>}
                                 </div>
                               </td>
-                              <td className="p-4 text-muted-foreground max-w-xs truncate" title={booking.message || booking.concerns}>
+                              <td className="p-4 text-muted-foreground max-w-md whitespace-pre-wrap font-medium leading-relaxed">
                                 {booking.message || booking.concerns || <span className="italic text-muted-foreground/50">None</span>}
                               </td>
                             </tr>

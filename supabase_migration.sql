@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS blog_posts (
   featured BOOLEAN DEFAULT false,
   tags TEXT[] DEFAULT '{}',
   image_url TEXT,
+  video_url TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
