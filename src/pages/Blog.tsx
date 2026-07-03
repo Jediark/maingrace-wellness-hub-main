@@ -119,9 +119,9 @@ const Blog = () => {
             <Card variant="feature" className="overflow-hidden">
               <div className="grid lg:grid-cols-2 gap-8 p-8">
                 <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl h-64 lg:h-auto flex items-center justify-center overflow-hidden">
-                  {featuredPost.image ? (
+                  {(featuredPost.image || featuredPost.image_url) ? (
                     <img 
-                      src={featuredPost.image} 
+                      src={featuredPost.image || featuredPost.image_url} 
                       alt={featuredPost.title} 
                       className="w-full h-full object-cover"
                     />
@@ -186,9 +186,9 @@ const Blog = () => {
                     <Card key={post.id} variant="elevated" className="group h-full">
                       <CardHeader>
                         <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl h-48 flex items-center justify-center mb-4 overflow-hidden">
-                          {post.image ? (
+                          {(post.image || post.image_url) ? (
                             <img
-                              src={post.image}
+                              src={post.image || post.image_url}
                               alt={post.title}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />

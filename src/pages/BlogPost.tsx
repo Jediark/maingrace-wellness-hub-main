@@ -117,10 +117,10 @@ const BlogPost = () => {
             {/* Main Content */}
             <article className="lg:col-span-2 space-y-8">
               {/* Media Section (Image) */}
-              {post.image_url ? (
+              {(post.image_url || post.image) ? (
                 <div className="relative aspect-video rounded-none overflow-hidden shadow-card border-4 border-primary bg-muted">
                   <img
-                    src={post.image_url}
+                    src={post.image_url || post.image}
                     alt={post.title}
                     className="w-full h-full object-cover"
                     onError={(e) => {

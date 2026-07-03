@@ -605,7 +605,7 @@ const Admin = () => {
                             <div className="p-6 space-y-4">
                               <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden border border-border">
                                 <img 
-                                  src={blog.image_url} 
+                                  src={blog.image_url || blog.image} 
                                   alt={blog.title} 
                                   className="w-full h-full object-cover"
                                   onError={(e) => {
@@ -634,8 +634,7 @@ const Admin = () => {
                                   author_role: blog.author_role,
                                   date: blog.date,
                                   read_time: blog.read_time,
-                                  image_url: blog.image_url,
-                                  video_url: blog.video_url || "",
+                                  image_url: blog.image_url || blog.image,
                                   featured: blog.featured,
                                   tags: Array.isArray(blog.tags) ? blog.tags.join(", ") : blog.tags
                                 })}

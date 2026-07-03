@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { blogPosts } from "@/data/blogPosts";
+import { blogPosts as staticPosts } from "@/data/blogPosts";
+import { useBlogPosts } from "@/hooks/useSupabase";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import heroBg from "@/assets/hero-bg.webp";
 
 const FeaturedBlog = () => {
-  const featuredPosts = blogPosts.slice(0, 3);
+  const { data: dbPosts } = useBlogPosts();
+  const livePosts = (dbPosts && dbPosts.length > 0) ? dbPosts : staticPosts;
+  const featuredPosts = livePosts.slice(0, 3);
 
   return (
     <section className="py-24 lg:py-32 bg-muted relative overflow-hidden border-y-8 border-primary">
@@ -37,7 +40,7 @@ const FeaturedBlog = () => {
               <CardHeader className="p-0">
                 <div className="relative h-64 overflow-hidden border-b-4 border-primary">
                   <img
-                    src={post.image || heroBg}
+                    src={post.image_url || post.image || heroBg}
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
@@ -56,7 +59,7 @@ const FeaturedBlog = () => {
                   </span>
                   <span className="flex items-center gap-2">
                     <Clock className="w-3 h-3 text-primary" />
-                    {post.readTime}
+                    {post.readTime || post.read_time}
                   </span>
                 </div>
                 <CardTitle className="text-2xl font-serif font-bold group-hover:text-primary transition-colors leading-[1.2]">
