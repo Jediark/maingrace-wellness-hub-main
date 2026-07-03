@@ -90,7 +90,7 @@ const Admin = () => {
 
       if (error) {
         throw new Error(
-          "Supabase storage bucket 'images' might not exist or lacks public write permissions. Please verify your Supabase configuration."
+          `Supabase upload error: ${error.message}. Please verify that a public storage bucket named 'images' exists and has insert permissions enabled in your Supabase policies.`
         );
       }
 
