@@ -99,7 +99,7 @@ const RemoteConsultation = () => {
         formData.medicalHistory ? `*Medical History:* ${formData.medicalHistory}` : "",
       ].filter(Boolean).join("\n");
 
-      const whatsappUrl = `https://wa.me/2347013376463?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/2347068509060?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, "_blank");
 
       toast.success(

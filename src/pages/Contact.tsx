@@ -15,7 +15,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    details: ["07013376463", "07068509060"],
+    details: ["07068509060"],
   },
   {
     icon: Mail,
@@ -39,7 +39,7 @@ import { useSEO } from "@/hooks/useSEO";
 const Contact = () => {
   useSEO({
     title: "Contact Us | Location, Phone & Opening Hours",
-    description: "Get in touch with MAINGRACE TRADOMEDICAL SERVICE. Visit our branch on Olowotedo/Ibadan ExpressWay or call us at +2347013376463.",
+    description: "Get in touch with MAINGRACE TRADOMEDICAL SERVICE. Visit our branch on Olowotedo/Ibadan ExpressWay or call us at +2347068509060.",
     keywords: "contact maingrace, herbal center location, phone number tradomedical, message herbal doctor"
   });
 
@@ -247,7 +247,7 @@ const Contact = () => {
                 </h3>
                 <div className="space-y-4">
                   <a 
-                    href="https://wa.me/2347013376463" 
+                    href="https://wa.me/2347068509060" 
                     className="flex items-center gap-4 p-4 rounded-xl bg-muted hover:bg-muted/80 transition-colors"
                   >
                     <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white">
@@ -260,7 +260,7 @@ const Contact = () => {
                   </a>
                   
                   <a 
-                    href="tel:+2347013376463" 
+                    href="tel:+2347068509060" 
                     className="flex items-center gap-4 p-4 rounded-xl bg-muted hover:bg-muted/80 transition-colors"
                   >
                     <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground">

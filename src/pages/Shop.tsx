@@ -38,7 +38,7 @@ const Shop = () => {
 
   const handleGetQuote = (productName: string) => {
     const message = encodeURIComponent(`Hello MAINGRACE GLOBAL LIMITED, I'm interested in getting a quote for: ${productName}. Please provide more details.`);
-    window.open(`https://wa.me/2347013376463?text=${message}`, "_blank");
+    window.open(`https://wa.me/2347068509060?text=${message}`, "_blank");
   };
 
   // Center active category on mobile

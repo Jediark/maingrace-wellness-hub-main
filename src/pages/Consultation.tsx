@@ -95,7 +95,7 @@ const Consultation = () => {
         formData.concerns ? `*Health Concerns:* ${formData.concerns}` : "",
       ].filter(Boolean).join("\n");
       
-      const whatsappUrl = `https://wa.me/2347013376463?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/2347068509060?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, "_blank");
 
       // Store submitted data for success screen backup
@@ -127,7 +127,7 @@ const Consultation = () => {
       `*Preferred Time:* ${submittedData?.time}`,
       submittedData?.concerns ? `*Health Concerns:* ${submittedData.concerns}` : "",
     ].filter(Boolean).join("\n");
-    return `https://wa.me/2347013376463?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/2347068509060?text=${encodeURIComponent(message)}`;
   };
 
   return (

@@ -32,7 +32,7 @@ const CTASection = () => {
                 </div>
                 <div>
                   <p className="font-bold text-xs uppercase tracking-widest text-muted-foreground mb-1">Direct Line</p>
-                  <p className="font-serif font-bold text-lg">07013376463</p>
+                  <p className="font-serif font-bold text-lg">07068509060</p>
                 </div>
               </div>
               

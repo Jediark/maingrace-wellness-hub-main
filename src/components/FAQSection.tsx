@@ -92,7 +92,7 @@ const FAQSection = () => {
           <div className="mt-16 p-8 bg-primary text-center">
             <p className="text-white font-bold mb-4 italic">Still have questions about our botanical solutions?</p>
             <a 
-              href="https://wa.me/2347013376463"
+              href="https://wa.me/2347068509060"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-background dark:bg-card text-primary px-8 py-3 font-bold uppercase tracking-widest hover:bg-accent hover:text-white transition-all transform hover:-translate-y-1 shadow-card"

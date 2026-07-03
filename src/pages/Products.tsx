@@ -46,7 +46,15 @@ const products = [
   },
 ];
 
+import { useSEO } from "@/hooks/useSEO";
+
 const Products = () => {
+  useSEO({
+    title: "Herbal Products & Remedy Packs Catalog",
+    description: "Browse our premium traditional remedies, packages, and health boosters. Secure a custom quote instantly.",
+    keywords: "herbal catalog, tradomedical remedies"
+  });
+
   const [selectedCategory, setSelectedCategory] = useState("All");
   
   const filteredProducts = selectedCategory === "All" 
@@ -55,7 +63,7 @@ const Products = () => {
 
   const handleGetQuote = (productName: string) => {
     const message = encodeURIComponent(`Hello Maingrace247, I'm interested in getting a quote for: ${productName}.`);
-    window.open(`https://wa.me/2347013376463?text=${message}`, "_blank");
+    window.open(`https://wa.me/2347068509060?text=${message}`, "_blank");
   };
 
   return (
