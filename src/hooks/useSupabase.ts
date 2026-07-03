@@ -96,3 +96,155 @@ export const useSubmitInquiry = () => {
     },
   });
 };
+
+// --- Admin Section Hooks ---
+
+// Fetch Consultation Requests
+export const useConsultationRequests = () => {
+  return useQuery({
+    queryKey: ["consultation_requests"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("consultation_requests")
+        .select("*")
+        .order("created_at", { ascending: false });
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+};
+
+// Fetch Contact Inquiries
+export const useContactInquiries = () => {
+  return useQuery({
+    queryKey: ["contact_inquiries"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("contact_inquiries")
+        .select("*")
+        .order("created_at", { ascending: false });
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+};
+
+// Add Product
+export const useAddProduct = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (product: any) => {
+      const { data, error } = await supabase
+        .from("products")
+        .insert([product])
+        .select();
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+};
+
+// Update Product
+export const useUpdateProduct = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, ...updates }: { id: number; [key: string]: any }) => {
+      const { data, error } = await supabase
+        .from("products")
+        .update(updates)
+        .eq("id", id)
+        .select();
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+};
+
+// Delete Product
+export const useDeleteProduct = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: number) => {
+      const { data, error } = await supabase
+        .from("products")
+        .delete()
+        .eq("id", id);
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+};
+
+// Add Blog Post
+export const useAddBlogPost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (post: any) => {
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .insert([post])
+        .select();
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["blog_posts"] });
+    },
+  });
+};
+
+// Update Blog Post
+export const useUpdateBlogPost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, ...updates }: { id: number; [key: string]: any }) => {
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .update(updates)
+        .eq("id", id)
+        .select();
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["blog_posts"] });
+      queryClient.invalidateQueries({ queryKey: ["blog_post"] });
+    },
+  });
+};
+
+// Delete Blog Post
+export const useDeleteBlogPost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: number) => {
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .delete()
+        .eq("id", id);
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["blog_posts"] });
+    },
+  });
+};
+
