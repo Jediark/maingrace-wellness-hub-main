@@ -83,20 +83,30 @@ const Admin = () => {
       const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
       const filePath = `${type}s/${fileName}`;
 
-      // Upload to 'images' bucket
-      const { data, error } = await supabase.storage
-        .from("images")
+      // Try uppercase 'IMAGES' bucket first, fallback to lowercase 'images'
+      let uploadResult = await supabase.storage
+        .from("IMAGES")
         .upload(filePath, file, { cacheControl: "3600", upsert: true });
 
-      if (error) {
+      let activeBucket = "IMAGES";
+
+      if (uploadResult.error && uploadResult.error.message.toLowerCase().includes("not found")) {
+        // Fallback to lowercase 'images'
+        uploadResult = await supabase.storage
+          .from("images")
+          .upload(filePath, file, { cacheControl: "3600", upsert: true });
+        activeBucket = "images";
+      }
+
+      if (uploadResult.error) {
         throw new Error(
-          `Supabase upload error: ${error.message}. Please verify that a public storage bucket named 'images' exists and has insert permissions enabled in your Supabase policies.`
+          `Supabase upload error: ${uploadResult.error.message}. Please verify that the storage bucket '${activeBucket}' has insert permissions enabled in your Supabase policies.`
         );
       }
 
       const { data: publicUrlData } = supabase.storage
-        .from("images")
-        .getPublicUrl(data.path);
+        .from(activeBucket)
+        .getPublicUrl(uploadResult.data.path);
 
       if (type === "product") {
         setProductForm((prev: any) => ({ ...prev, image: publicUrlData.publicUrl }));
