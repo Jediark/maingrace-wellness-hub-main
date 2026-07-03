@@ -94,19 +94,19 @@ const Admin = () => {
       const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
       const filePath = `${type === "video" ? "videos" : `${type}s`}/${fileName}`;
 
-      // Upload directly to lowercase 'images' bucket
+      // Upload directly to uppercase 'IMAGES' bucket
       const uploadResult = await supabase.storage
-        .from("images")
+        .from("IMAGES")
         .upload(filePath, file, { cacheControl: "3600", upsert: true });
 
       if (uploadResult.error) {
         throw new Error(
-          `Supabase upload error: ${uploadResult.error.message}. Please verify that your storage bucket 'images' has insert permissions enabled for anon/public in your Supabase policies.`
+          `Supabase upload error: ${uploadResult.error.message}. Please verify that your storage bucket 'IMAGES' has insert permissions enabled for anon/public in your Supabase policies.`
         );
       }
 
       const { data: publicUrlData } = supabase.storage
-        .from("images")
+        .from("IMAGES")
         .getPublicUrl(uploadResult.data.path);
 
       if (type === "product") {
